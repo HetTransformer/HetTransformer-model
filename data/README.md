@@ -1,7 +1,8 @@
 # Data Collection and Pre-processing
-This folder contains code for collecting the datasets and pre-processing them/
+This folder contains code for collecting the datasets and pre-processing them.
 
 ## Data Collection
+The instructions for collecting PolitiFact, GossipCop, and PHEME datasets are described in [the README.md in the root directory](https://github.com/HetTransformer/HetTransformer-model#readme).
 * `compute_statistics_fakenewsnet.py` computes the statistics for your collection of PolitiFact and GossipCop datasets.
 * `deduplication_fakenewsnet.py` serves as an extension to [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) by extracting the previously failed requests from the log files to avoid sending duplicated data collection requests.
 
