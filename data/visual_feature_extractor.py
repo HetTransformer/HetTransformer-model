@@ -59,7 +59,7 @@ for file_path in file_paths:
     dataset = img_Dataset(file_path, 224)
     train_loader = DataLoader(dataset, batch_size=1, shuffle=False)
     EPOCH = 1
-
+    os.mkdir(file_path[:-4]+'visual_feature/')
 
     for epoch in range(EPOCH):
         for step, data in enumerate(train_loader):
