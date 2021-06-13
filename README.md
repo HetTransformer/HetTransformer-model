@@ -5,43 +5,45 @@ This repository introduces the use of HetTransformer model.
 This is the intended directory sturcture after the completion of data collection and processing steps.
 ```
 .
-├── data/                     # Datasets and their processing scripts
-    ├── FakeNewsNet/          # Cloned FakeNewsNet repository
-        ├── PolitiFact/
-            ├── Fake_News/
-                ├── img/
-                ├── visual_feature/
-                └── ...       # The PolitiFact fake news folders collected
-            ├── Real_News/
-                ├── img/
-                ├── visual_feature/
-                └── ...       # The PolitiFact real news folders collected
-        ├── GossipCop/
-            ├── Fake_News/
-                ├── img/
-                ├── visual_feature/
-                └── ...       # The GossipCop fake news folders collected
-            ├── Real_News/
-                ├── img/
-                ├── visual_feature/
-                └── ...       # The GossipCop real news folders collected
-    ├── PHEME/                # Collected and unzipped PHEME datapath
-        ├── Fake_News/
-            └── ...           # The PHEME fake news folders collected
-        ├── Real_News/
-            └── ...           # The PHEME real news folders collected
-    ├── processed_data/       # Pre-processed data
-    ├── rwr_results/          # Generated RWR neighbors
-    └── ...                   # Data processing scripts
-├── figures_and_tables/       # Figures and tables in this README.md 
-├── models/                   # Experiments-related scripts
-    ├── train_and_evaluation/ # The model training and evaluation code
-    ├── para_sensitivity/     # Parameter sensitivity code
-    ├── data_splits/          # Train-val-test split used
-    └── pre-trained/          # The pre-trained models
-├── utils/                    # Helper functions
-├── README.md                 # Reproduction instructions
-└── requirements.txt          # Dependencies
+├── data/                               # Datasets and their processing scripts
+|   ├── FakeNewsNet/                    # Cloned [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) repository
+|   |   ├── PolitiFact/
+|   |   |   ├── Fake_News/
+|   |   |   |   ├── img/
+|   |   |   |   ├── visual_feature/
+|   |   |   |   └── ...                 # The PolitiFact fake news folders collected
+|   |   |   └── Real_News/
+|   |   |       ├── img/
+|   |   |       ├── visual_feature/
+|   |   |       └── ...                 # The PolitiFact real news folders collected
+|   |   └── GossipCop/
+|   |   |   ├── Fake_News/
+|   |   |   |   ├── img/
+|   |   |   |   ├── visual_feature/
+|   |   |   |   └── ...                 # The GossipCop fake news folders collected
+|   |   |   └── Real_News/
+|   |   |       ├── img/
+|   |   |       ├── visual_feature/
+|   |   |       └── ...                 # The GossipCop real news folders collected
+|   |   └── ...                         # Other directories and files in the cloned FakeNewsNet
+|   ├── PHEME/                          # Collected and unzipped [PHEME](https://figshare.com/articles/dataset/PHEME_dataset_of_rumours_and_non-rumours/4010619) datapath
+|   |   ├── Fake_News/
+|   |   |   └── ...                     # The PHEME fake news folders collected
+|   |   ├── Real_News/
+|   |   |   └── ...                     # The PHEME real news folders collected
+|   |   └── ...                         # Other directories and files in the downloaded PHEME
+|   ├── processed_data/                 # Pre-processed data
+|   ├── rwr_results/                    # Generated RWR neighbors
+|   └── ...                             # Data processing scripts
+├── figures_and_tables/                 # Figures and tables in this README.md 
+├── models/                             # Experiments-related scripts
+|   ├── train_and_evaluation/           # The model training and evaluation code
+|   ├── para_sensitivity/               # Parameter sensitivity code
+|   ├── data_splits/                     # Train-val-test split used
+|   └── pre-trained/                    # The pre-trained models
+├── utils/                              # Helper functions
+├── README.md                           # Reproduction instructions
+└── requirements.txt                    # Dependencies
 ```
 
 ## 0. Requirements
