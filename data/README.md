@@ -1,7 +1,8 @@
 # Data Collection and Pre-processing
-This folder contains code for collecting the datasets and pre-processing them/
+This folder contains code for collecting the datasets and pre-processing them.
 
-## Data Collection
+## Data collection
+The instructions for collecting PolitiFact, GossipCop, and PHEME datasets are described in the [README.md](https://github.com/HetTransformer/HetTransformer-model#1-dataset-collection) in the root directory. Please finish them first.
 * `compute_statistics_fakenewsnet.py` computes the statistics for your collection of PolitiFact and GossipCop datasets.
 * `deduplication_fakenewsnet.py` serves as an extension to [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) by extracting the previously failed requests from the log files to avoid sending duplicated data collection requests.
 
@@ -22,3 +23,19 @@ This folder contains code for collecting the datasets and pre-processing them/
 * `embed_text_pheme.py` embeds the text for all types of nodes in PHEME datasets with `text_embedder.py` with multi-processing.
 
 ## Other features
+* `get_fnn_post_features.py` extracts the numeric and catagorical features of all posts in PolitiFact and GossipCop datasets.
+* `get_fnn_user_features.py` extracts the numeric and catagorical features of all users in PolitiFact and GossipCop datasets.
+* `get_fnn_news_labels.py` extracts the news labels of news in PolitiFact and GossipCop datasets.
+* `get_pheme_news_features.py` extracts the numeric and catagorical features of all news in PHEME dataset.
+* `get_pheme_user_features.py` extracts the numeric and catagorical features of all user in PHEME dataset.
+* `get_pheme_news_labels.py` extracts the news labels of all news in PHEME dataset.
+
+## Create input dataset
+* `news_nodes_pheme.py` contains the function to combine all news features (e.g., the embedding for news content and news image, news label) and to create the news nodes input for PHEME dataset. 
+* `post_nodes_pheme.py` contains the function to combine all post features (e.g., the embedding for post content, neighbor lists) and to create the news nodes input for PHEME dataset. 
+* `user_nodes_pheme.py` contains the function to combine all user features (e.g., the embedding for user description, user characteristics) and to create the news nodes input for PHEME dataset. 
+* `pheme_dataset.py` contains the main function to call all the nodes-creating functions mentioned above.
+* `news_nodes_fnn.py` contains the function to combine all news features (e.g., the embedding for news content and news image, news label) and to create the news nodes input for PolitiFact and GossipCop dataset. 
+* `post_nodes_fnn.py` contains the function to combine all post features (e.g., the embedding for post content, neighbor lists) and to create the news nodes input for PolitiFact and GossipCop dataset. 
+* `user_nodes_fnn.py` contains the function to combine all user features (e.g., the embedding for user description, user characteristics) and to create the news nodes input for PolitiFact and GossipCop dataset. 
+* `fnn_dataset.py` contains the main function to call all the nodes-creating functions mentioned above.
