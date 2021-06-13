@@ -7,6 +7,18 @@ The instructions for collecting PolitiFact, GossipCop, and PHEME datasets are de
 * `deduplication_fakenewsnet.py` serves as an extension to [FakeNewsNet](https://github.com/KaiDMML/FakeNewsNet) by extracting the previously failed requests from the log files to avoid sending duplicated data collection requests.
 
 ## Image fetching and encoding
+Run the following commands under `data/` to create the directory structure needed:
+```
+#!/bin/tcsh
+foreach DATASET ("FakeNewsNet/PolitiFact" "FakeNewsNet/GossipCop" "PHEME")
+  mkdir $DATASET "$DATASET/Fake_News" "$DATASET/Real_News"
+end
+foreach DATASET ("FakeNewsNet/PolitiFact" "FakeNewsNet/GossipCop")
+  foreach SUBSET ("Fake_News" "Real_News")
+    mkdir "$DATASET/$SUBSET" "$DATASET/$SUBSET/img" "$DATASET/$SUBSET/visual_feature"
+  end
+end
+```
 * `fetch_fakenewsnet_img.py` is used to collect the images attached in news content in PolitiFact and GossipCop datasets.
 * `fetch_fakenewsnet_img_multiproc.py` is used to collect the images attached in news content in PolitiFact and GossipCop datasets with multiple workers.
 * `visual_feature_extractor.py` uses pre-trained ResNet 18 to extract the viusal features from the images attached in news content. This function is used for PolitiFact and GossipCop. We feed in a white image if there's no image attached in news of PolitiFact and GossipCop datasets. All the news in PHEME dataset does not have images, so this function does not apply to PHEME. 
