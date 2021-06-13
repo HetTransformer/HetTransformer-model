@@ -14,13 +14,13 @@ for data_dir in data_dirs:
     urllib.request.install_opener(opener)
     errors = []
     picture_error = []
-    for j_name in all_json[1:]:
+    for j_name in all_json:
         j = open(data_dir+j_name,'rb')
         info = json.load(j)
         try:
             print(info['top_img'])
             try:
-                urllib.request.urlretrieve(info['top_img'], data_dir+"img/"+j_name[:-5]+".jpg")
+                urllib.request.urlretrieve(info['top_img'], data_dir[:-6]+"/img/"+j_name[:-5]+".jpg")
             except:
                 print(j_name)
                 picture_error.append(j_name)
