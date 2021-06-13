@@ -832,7 +832,7 @@ for npu in npus:
         output = 0.0
         avg_tloss = 0.0
         for fold in range(num_folds):
-            result = best_models[fold](test_set[k])
+            result = net(test_set[k])
             output += result.item()
             tloss = BCELoss(predictions=result, true_label=test_set[k].label)
             avg_tloss += tloss.item()
