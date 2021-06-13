@@ -1,1 +1,4 @@
-To be completed
+torch==1.8.0 
+numpy==1.19.2
+transformers==4.5.1  # Text encoding
+torch-position-embedding==0.8.0  # Positional embedding
