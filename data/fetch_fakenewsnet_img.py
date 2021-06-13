@@ -7,6 +7,7 @@ data_dirs = ["/data/FakeNewsNet/PolitiFact/Real_News/", "/data/FakeNewsNet/Polit
 
 for data_dir in data_dirs:
     all_json = os.listdir(data_dir)
+    os.mkdir(data_dir+'img/')
     k = 0
     cj = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
@@ -20,7 +21,7 @@ for data_dir in data_dirs:
         try:
             print(info['top_img'])
             try:
-                urllib.request.urlretrieve(info['top_img'], data_dir[:-6]+"/img/"+j_name[:-5]+".jpg")
+                urllib.request.urlretrieve(info['top_img'], data_dir+"img/"+j_name[:-5]+".jpg")
             except:
                 print(j_name)
                 picture_error.append(j_name)
