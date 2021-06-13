@@ -5,17 +5,43 @@ This repository introduces the use of HetTransformer model.
 This is the intended directory sturcture after the completion of data collection and processing steps.
 ```
 .
-├── data/                   # Datasets and their processing scripts
-│   ├── FakeNewsNet/        # Cloned FakeNewsNet repository
-│   ├── PHEME/              # Collected and unzipped PHEME datapath
-│   ├── processed_data/     # Pre-processed data
-│   ├── rwr_results/        # Generated RWR neighbors
-│   └── ...                 # Data processing scripts
-├── figures_and_tables/     # Figures and tables in this README.md 
-├── models/                 # Experiments-related scripts
-├── utils/                  # Helper functions
-├── README.md               # Reproduction instructions
-└── requirements.txt        # Dependencies
+├── data/                     # Datasets and their processing scripts
+│   ├── FakeNewsNet           # Cloned FakeNewsNet repository
+        ├── PolitiFact
+            ├── Fake_News
+                ├── img
+                ├── visual_feature
+                ├── ...       # The PolitiFact fake news folders collected
+            ├── Real_News
+                ├── img
+                ├── visual_feature
+                ├── ...       # The PolitiFact real news folders collected
+        ├── GossipCop
+            ├── Fake_News
+                ├── img
+                ├── visual_feature
+                ├── ...       # The GossipCop fake news folders collected
+            ├── Real_News
+                ├── img
+                ├── visual_feature
+                ├── ...       # The GossipCop real news folders collected
+│   ├── PHEME/                # Collected and unzipped PHEME datapath
+        ├── Fake_News
+            ├── ...           # The PHEME fake news folders collected
+        ├── Real_News
+            ├── ...           # The PHEME real news folders collected
+    ├── processed_data/       # Pre-processed data
+    ├── rwr_results/          # Generated RWR neighbors
+    └── ...                   # Data processing scripts
+├── figures_and_tables/       # Figures and tables in this README.md 
+├── models/                   # Experiments-related scripts
+    ├── train_and_evaluation  # The model training and evaluation code
+    ├── para-sensitivity      # Parameter sensitivity code
+    ├── data_splits           # Train-val-test split used
+    ├── pre-trained           # The pre-trained models
+├── utils/                    # Helper functions
+├── README.md                 # Reproduction instructions
+└── requirements.txt          # Dependencies
 ```
 
 ## 0. Requirements
