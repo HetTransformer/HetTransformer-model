@@ -8,8 +8,8 @@ from os import listdir
 from os.path import join
 from json import load
 
-in_dir = 'pheme-figshare'
-out_dir = 'pheme-figshare'
+in_dir = 'PHEME'
+out_dir = 'PHEME'
 node_files = {
 }
 edge_files = {

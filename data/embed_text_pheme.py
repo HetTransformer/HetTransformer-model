@@ -9,7 +9,7 @@ from os import listdir
 from os.path import join
 
 # input
-in_dir = 'pheme-figshare'
+in_dir = 'PHEME'
 involved_dir = f'rwr_results/pheme_n5_p5_u100'
 
 # output

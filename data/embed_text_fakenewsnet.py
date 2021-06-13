@@ -11,7 +11,7 @@ in_dir = 'FakeNewsNet/code/fakenewsnet_dataset'
 dataset = 'politifact'
 # dataset = 'gossipcop'
 ds_dirs = [os.path.join(in_dir, dataset, ss) for ss in ['real', 'fake']]  #########################
-involved_dir = f'fyp_code/rwr_results/fnn_{dataset}_512'
+involved_dir = f'rwr_results/fnn_{dataset}_512'
 
 # output
 out_dir = 'FakeNewsNet/text_embeddings'

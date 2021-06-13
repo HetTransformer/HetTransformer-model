@@ -37,7 +37,7 @@ if __name__ == "__main__":
     for dataset in ['pheme', 'politifact', 'gossipcop']:
         if dataset in ['politifact', 'gossipcop']:
             prefix = f'fnn_{dataset}_'
-            in_dir = f'/rwproject/kdd-db/20-rayw1/FakeNewsNet/graph_def/{dataset}'
+            in_dir = f'FakeNewsNet/graph_def/{dataset}'
             edge_dir = os.path.join(in_dir, dataset)
             node_types = ['n', 'p', 'u']
             edge_files = {
@@ -49,7 +49,7 @@ if __name__ == "__main__":
             edges_to_enforce = {('p', 'u'),}
         elif dataset == 'pheme':
             prefix = 'pheme_'
-            in_dir = '/rwproject/kdd-db/20-rayw1/pheme-figshare'
+            in_dir = 'PHEME'
             edge_dir = in_dir
             node_types = ['n', 'p', 'u']
             edge_files = {
@@ -63,7 +63,7 @@ if __name__ == "__main__":
             edges_to_enforce = {('n', 'u'), ('p', 'u'),}
         elif dataset == 'buzzfeed':
             prefix = 'buzzfeed_'
-            in_dir = '/rwproject/kdd-db/20-rayw1/buzzfeed-kaggle'
+            in_dir = 'buzzfeed-kaggle'
             edge_dir = in_dir
             node_types = ['n', 's', 'u']
             edge_files = {
