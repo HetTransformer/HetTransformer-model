@@ -52,27 +52,28 @@ class img_Dataset(Dataset):
         return len(self.image_files)
 
 
-file_path = "/Data/PolitiFact/FakeNewsContent/img/"
-all_img = os.listdir(file_path)
-print(all_img)
-dataset = img_Dataset(file_path, 224)
-train_loader = DataLoader(dataset, batch_size=1, shuffle=False)
-EPOCH = 1
+file_paths = ["/data/FakeNewsNet/PolitiFact/Fake_News/img/", "/data/FakeNewsNet/PolitiFact/Real_News/img/", "/data/FakeNewsNet/GossipCop/Fake_News/img/", "/data/FakeNewsNet/GossipCop/Real_News/img/"]
+for file_path in file_paths:
+    all_img = os.listdir(file_path)
+    print(all_img)
+    dataset = img_Dataset(file_path, 224)
+    train_loader = DataLoader(dataset, batch_size=1, shuffle=False)
+    EPOCH = 1
 
 
-for epoch in range(EPOCH):
-    for step, data in enumerate(train_loader):
-        txt_name = all_img[step][:-4]
-        out = model(data)
-        out = torch.reshape(out, (out.shape[1], -1))
-        print(step)
-        out_np = out.detach().numpy()
-        np.savetxt('/Data/img_features/PolitiFact/' + txt_name + '.txt', out_np)
+    for epoch in range(EPOCH):
+        for step, data in enumerate(train_loader):
+            txt_name = all_img[step][:-4]
+            out = model(data)
+            out = torch.reshape(out, (out.shape[1], -1))
+            print(step)
+            out_np = out.detach().numpy()
+            np.savetxt(file_path[:-4] + 'visual_feature/' + txt_name + '.txt', out_np)
 
 
-empty = np.zeros((1,3,224,224))
-empty = torch.Tensor(empty)
-out = model(empty)
-out = torch.reshape(out, (out.shape[1], -1))
-out_np = out.detach().numpy()
-np.savetxt('/Data/img_features/white.txt', out_np)
+    empty = np.zeros((1,3,224,224))
+    empty = torch.Tensor(empty)
+    out = model(empty)
+    out = torch.reshape(out, (out.shape[1], -1))
+    out_np = out.detach().numpy()
+    np.savetxt(file_path[:-4] + 'visual_feature/' + 'white.txt', out_np)
