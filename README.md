@@ -6,7 +6,7 @@ This is the intended directory sturcture after the completion of data collection
 ```
 .
 ├── data/                     # Datasets and their processing scripts
-│   ├── FakeNewsNet           # Cloned FakeNewsNet repository
+    ├── FakeNewsNet           # Cloned FakeNewsNet repository
         ├── PolitiFact
             ├── Fake_News
                 ├── img
@@ -25,7 +25,7 @@ This is the intended directory sturcture after the completion of data collection
                 ├── img
                 ├── visual_feature
                 ├── ...       # The GossipCop real news folders collected
-│   ├── PHEME/                # Collected and unzipped PHEME datapath
+    ├── PHEME/                # Collected and unzipped PHEME datapath
         ├── Fake_News
             ├── ...           # The PHEME fake news folders collected
         ├── Real_News
