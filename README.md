@@ -36,7 +36,7 @@ This is the intended directory sturcture after the completion of data collection
 ├── figures_and_tables/       # Figures and tables in this README.md 
 ├── models/                   # Experiments-related scripts
     ├── train_and_evaluation  # The model training and evaluation code
-    ├── para-sensitivity      # Parameter sensitivity code
+    ├── para_sensitivity      # Parameter sensitivity code
     ├── data_splits           # Train-val-test split used
     ├── pre-trained           # The pre-trained models
 ├── utils/                    # Helper functions
