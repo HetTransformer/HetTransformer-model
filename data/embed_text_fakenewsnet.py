@@ -1,7 +1,6 @@
 import os
 import json
 import torch
-from matplotlib.pyplot import text
 from tqdm import tqdm
 from text_embedder import TextEmbedder
 from multiprocessing import Manager, Process, Pool
@@ -186,6 +185,6 @@ def process_user_description(num_process = 8):
         embed_text(ids, description, max_seq_len=49, config=configs['tweet'], dir_name='user_description', num_process=num_process)
 
 if __name__ == '__main__':
-    # process_news()
+    process_news()
     process_tweets()
-    # process_user_description()
+    process_user_description()

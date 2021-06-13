@@ -1,4 +1,8 @@
 torch==1.8.0 
 numpy==1.19.2
 transformers==4.5.1  # Text encoding
+requests==2.25.1  # Fetch FakeNewsNet images
+urllib3==1.25.11  # Fetch FakeNewsNet images
+torchvision==0.9.0  # Image encoding
+PIL==8.2.0  # Image encoding
 torch-position-embedding==0.8.0  # Positional embedding

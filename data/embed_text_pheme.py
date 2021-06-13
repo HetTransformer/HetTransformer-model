@@ -2,13 +2,11 @@ import os
 import json
 from typing import List
 import torch
-from matplotlib.pyplot import text
 from tqdm import tqdm
 from text_embedder import TextEmbedder
 from multiprocessing import Manager, Process, Pool
 from os import listdir
 from os.path import join
-from weibo import save_embed_file
 
 # input
 in_dir = 'pheme-figshare'
@@ -26,6 +24,11 @@ configs = {
     },
 }
 device = 'cuda:0'
+
+def save_embed_file(dir, tid, feature):
+    f = open('{}/{}.txt'.format(dir, tid), 'w')
+    f.writelines(' '.join(['{:.8f}'.format(v) for v in feature]) + '\n')
+    f.close()
 
 def save_embeddings_worker(dir_name, ids, features):
     for i in tqdm(range(len(ids)), desc='save embed'):
@@ -137,5 +140,5 @@ def process_user_description(num_process = 8):
             embed_text(ids, description, max_seq_len=49, config=configs['tweet'], dir_name='user_description', num_process=num_process)
 
 if __name__ == '__main__':
-    # process_tweets()
+    process_tweets()
     process_user_description()
