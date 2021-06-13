@@ -52,6 +52,10 @@ cd ..
 The zipped file is only 25M and can be downloaded in around 3 minutes.
 
 ## 2. Data Pre-processing
+Run the following to creat the directory sturcture needed.
+```
+mkdir data/processed_data data/rwr_results
+```
 Data pre-processing includes image fetching, image encoding, text encoding, graph construction, and the extraction of other features.
 The details are described in [`data/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/data).
 
