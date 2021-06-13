@@ -1,0 +1,2 @@
+# This folder contains the helper functions used in our model.
+## visual_feature_extractor.py uses pre-trained ResNet 18 to extract the viusal features from the images attached in news content. This function is used for PolitiFact and GossipCop. We feed in a white image if there's no image attached in news of PolitiFact and GossipCop datasets. All the news in PHEME dataset does not have images, so this function does not apply to PHEME. 
