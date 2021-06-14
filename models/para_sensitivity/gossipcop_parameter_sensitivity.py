@@ -42,10 +42,8 @@ def neighbor_loader(pathway):
         neighbor_dict_post[neighbor_list[0][1:-1]] = [item[1:] for item in neighbor_list[1:] if item[0] == 'p']
     return neighbor_dict_n_p_u, neighbor_dict_n, neighbor_dict_news, neighbor_dict_post, neighbor_dict_user
 
-neighbor_dict = neighbor_loader('/model/data_splits/GossipCop/n_neighbors.txt')
-#print(list(neighbor_dict[2].values())[:5])
-#print(list(neighbor_dict[3].values())[:5])
-#print(list(neighbor_dict[4].values())[:5])
+neighbor_dict = neighbor_loader('model/data_splits/GossipCop/n_neighbors.txt')
+
 
 def data_loader(pathway='\', node_type="post"):
     if node_type == "news":
@@ -164,9 +162,9 @@ def data_loader(pathway='\', node_type="post"):
             user_node.append(node)
         # padding_node = Het_Node(node_type='user', node_id=padding_id, embed=padding_embed)
         return user_node#, padding_node
-news_nodes = data_loader(pathway='/FakeNewsNet/FNN_input/Gossipcop/gossipcop_200/normalized_news_nodes/', node_type="news")
-post_nodes = data_loader(pathway='/FakeNewsNet/FNN_input/Gossipcop/gossipcop_200/normalized_post_nodes/', node_type="post")
-user_nodes = data_loader(pathway='/FakeNewsNet/FNN_input/Gossipcop/gossipcop_200/normalized_user_nodes/', node_type="user")
+news_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_news_nodes/', node_type="news")
+post_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_post_nodes/', node_type="post")
+user_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_user_nodes/', node_type="user")
 
 news_emb_dict = {}
 post_emb_dict = {}
@@ -845,15 +843,15 @@ def train_test(data_real, data_fake, test_size):
     y_fake = range(len(data_fake))
     X_train_real, X_test_real, y_train_real, y_test_real = train_test_split(data_real, y_real, test_size=test_size, random_state=42)
     X_train_fake, X_test_fake, y_train_fake, y_test_fake = train_test_split(data_fake, y_fake, test_size=test_size, random_state=42)
-    np.savetxt('/model/data_splits/GossipCop/train_index_real.txt', y_train_real)
-    np.savetxt('/model/data_splits/GossipCop/test_index_real.txt', y_test_real)
-    np.savetxt('/model/data_splits/GossipCop/train_index_fake.txt', y_train_fake)
-    np.savetxt('/model/data_splits/GossipCop/test_index_fake.txt', y_test_fake)
+    np.savetxt('model/data_splits/GossipCop/train_index_real.txt', y_train_real)
+    np.savetxt('model/data_splits/GossipCop/test_index_real.txt', y_test_real)
+    np.savetxt('model/data_splits/GossipCop/train_index_fake.txt', y_train_fake)
+    np.savetxt('model/data_splits/GossipCop/test_index_fake.txt', y_test_fake)
     return X_train_real, X_test_real, X_train_fake, X_test_fake
 
 
 
-def load_train_test(data_real, data_fake, test_index_path_real='/model/data_splits/GossipCop/test_index_real.txt', test_index_path_fake = '/model/data_splits/GossipCop/test_index_fake.txt'):
+def load_train_test(data_real, data_fake, test_index_path_real='model/data_splits/GossipCop/test_index_real.txt', test_index_path_fake = 'model/data_splits/GossipCop/test_index_fake.txt'):
     a = np.loadtxt(test_index_path_real)
     a = a.astype('int32')
     b = np.loadtxt(test_index_path_fake)
@@ -877,7 +875,7 @@ def load_train_test(data_real, data_fake, test_index_path_real='/model/data_spli
 
 
 # split test set first
-if path.exists('/model/data_splits/GossipCop/test_index_real.txt'):
+if path.exists('model/data_splits/GossipCop/test_index_real.txt'):
     X_train_real, X_test_real, X_train_fake, X_test_fake = load_train_test(news_nodes_real, news_nodes_fake)
 else:
     X_train_real, X_test_real, X_train_fake, X_test_fake = train_test(news_nodes_real, news_nodes_fake, 0.1)
@@ -903,7 +901,7 @@ lr = 0.001
 num_epoch = 40
 num_folds = 1
 batch_size = 4
-PATH = '/model/best_models/GossipCop/'
+PATH = 'model/best_models/GossipCop/'
 
 
 print('Start training')
