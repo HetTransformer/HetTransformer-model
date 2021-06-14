@@ -8,32 +8,10 @@ This is the intended directory sturcture after the completion of data collection
 .
 ├── data/                               # Datasets and their processing scripts
 |   ├── FakeNewsNet/                    # Cloned FakeNewsNet repository
-|   |   ├── PolitiFact/
-|   |   |   ├── Fake_News/
-|   |   |   |   ├── img/
-|   |   |   |   ├── visual_feature/
-|   |   |   |   └── ...                 # The PolitiFact fake news folders collected
-|   |   |   └── Real_News/
-|   |   |       ├── img/
-|   |   |       ├── visual_feature/
-|   |   |       └── ...                 # The PolitiFact real news folders collected
-|   |   └── GossipCop/
-|   |   |   ├── Fake_News/
-|   |   |   |   ├── img/
-|   |   |   |   ├── visual_feature/
-|   |   |   |   └── ...                 # The GossipCop fake news folders collected
-|   |   |   └── Real_News/
-|   |   |       ├── img/
-|   |   |       ├── visual_feature/
-|   |   |       └── ...                 # The GossipCop real news folders collected
-|   |   └── ...                         # Other directories and files in the cloned FakeNewsNet
 |   ├── PHEME/                          # Collected and unzipped PHEME datapath
-|   |   ├── Fake_News/
-|   |   |   └── ...                     # The PHEME fake news folders collected
-|   |   ├── Real_News/
-|   |   |   └── ...                     # The PHEME real news folders collected
-|   |   └── ...                         # Other directories and files in the downloaded PHEME
 |   ├── processed_data/                 # Pre-processed data
+|   |   ├── FakeNewsNet/                # Pre-processed FakeNewsNet data
+|   |   └── PHEME/                      # Pre-processed PHEME data
 |   ├── rwr_results/                    # Generated RWR neighbors
 |   └── ...                             # Data processing scripts
 ├── figures_and_tables/                 # Figures and tables in this README.md 
@@ -49,8 +27,7 @@ This is the intended directory sturcture after the completion of data collection
 ```
 Run the following commands to creat the directory sturcture needed.
 ```
-chmod +x utils/build_dir_struct.sh
-./utils/build_dir_struct.sh
+mkdir data/processed_data data/processed_data/FakeNewsNet data/processed_data/PHEME data/rwr_results
 ```
 
 ## 0. Requirements
