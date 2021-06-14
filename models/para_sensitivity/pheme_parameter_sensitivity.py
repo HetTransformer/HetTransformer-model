@@ -42,7 +42,7 @@ def neighbor_loader(pathway):
         neighbor_dict_post[neighbor_list[0][1:-1]] = [item[1:] for item in neighbor_list[1:] if item[0] == 'p']
     return neighbor_dict_n_p_u, neighbor_dict_n, neighbor_dict_news, neighbor_dict_post, neighbor_dict_user
 
-neighbor_dict = neighbor_loader('model/data_splits/PHEME/n_neighbors.txt')
+neighbor_dict = neighbor_loader('models/data_splits/PHEME/n_neighbors.txt')
 
 # Load the node data
 def data_loader(pathway='\', node_type="news"):
@@ -642,14 +642,14 @@ def train_test(data_real, data_fake, test_size):
                                                                             random_state=45)
     X_train_fake, X_test_fake, y_train_fake, y_test_fake = train_test_split(data_fake, y_fake, test_size=test_size,
                                                                             random_state=45)
-    np.savetxt('model/data_splits/PHEME/train_index_real.txt', y_train_real)
-    np.savetxt('model/data_splits/PHEME/test_index_real.txt', y_test_real)
-    np.savetxt('model/data_splits/PHEME/train_index_fake.txt', y_train_fake)
-    np.savetxt('model/data_splits/PHEME/test_index_fake.txt', y_test_fake)
+    np.savetxt('models/data_splits/PHEME/train_index_real.txt', y_train_real)
+    np.savetxt('models/data_splits/PHEME/test_index_real.txt', y_test_real)
+    np.savetxt('models/data_splits/PHEME/train_index_fake.txt', y_train_fake)
+    np.savetxt('models/data_splits/PHEME/test_index_fake.txt', y_test_fake)
     return X_train_real, X_test_real, X_train_fake, X_test_fake
 
 
-def load_train_test(data_real, data_fake, test_index_path_real='model/data_splits/PHEME/test_index_real.txt', test_index_path_fake='model/data_splits/PHEME/test_index_fake.txt'):
+def load_train_test(data_real, data_fake, test_index_path_real='models/data_splits/PHEME/test_index_real.txt', test_index_path_fake='models/data_splits/PHEME/test_index_fake.txt'):
     a = np.loadtxt(test_index_path_real)
     a = a.astype('int32')
     b = np.loadtxt(test_index_path_fake)
@@ -672,7 +672,7 @@ def load_train_test(data_real, data_fake, test_index_path_real='model/data_split
 
 
 # split test set first
-if path.exists('model/data_splits/PHEME/test_index_real.txt'):
+if path.exists('models/data_splits/PHEME/test_index_real.txt'):
     X_train_real, X_test_real, X_train_fake, X_test_fake = load_train_test(news_nodes_real, news_nodes_fake)
 else:
     X_train_real, X_test_real, X_train_fake, X_test_fake = train_test(news_nodes_real, news_nodes_fake, 0.1)
@@ -696,7 +696,7 @@ for train, val in kfold.split(train_val):
 
 outemb_dims = [200, 80, 112, 160]
 hidden_dims = [64, 128, 256]
-PATH = 'model/best_models/PHEME/'
+PATH = 'models/best_models/PHEME/'
 
 
 lr = 0.001
