@@ -2,11 +2,16 @@ import json
 import os
 import urllib.request
 import http.cookiejar
+from os import path
 
-politifact_data_dirs = ["/data/FakeNewsNet/code/fakenewsnet_dataset/politifact/real/", "/data/FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"]
-gossipcop_data_dirs = ["/data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/", "/data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"]
-politifact_img_dir = "/data/processed_data/FakeNewsNet/PolitiFact/img/"
-gossipcop_img_dir = "/data/processed_data/FakeNewsNet/GossipCop/img/"
+politifact_data_dirs = ["data/FakeNewsNet/code/fakenewsnet_dataset/politifact/real/", "data/FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"]
+gossipcop_data_dirs = ["data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/", "data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"]
+politifact_img_dir = "data/processed_data/FakeNewsNet/PolitiFact/img/"
+gossipcop_img_dir = "data/processed_data/FakeNewsNet/GossipCop/img/"
+if not path.exists(politifact_img_dir):
+    os.mkdir(politifact_img_dir)
+if not path.exists(gossipcop_img_dir):
+    os.mkdir(gossipcop_img_dir)
 for data_dir in politifact_data_dirs: 
     all_folder = os.listdir(data_dir)
     for folder_name in all_folder:
