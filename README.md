@@ -68,7 +68,10 @@ Data pre-processing includes image fetching, image encoding, text encoding, grap
 The details are described in [`data/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/data).
 
 ## 3. Model Training and evaluation
-After generating batch files following step 1 and 2 in `data/processed_data/FakeNewsNet/PolitiFact/batch/`; `data/processed_data/FakeNewsNet/GossipCop/batch/`; `data/processed_data/PHEME/batch/` respectively. Run scripts in `models/train_and_evaluation/` to train the model and get the evaluation results. 
+After generating batch files following step 1 and 2 in `data/processed_data/FakeNewsNet/PolitiFact/batch/`; `data/processed_data/FakeNewsNet/GossipCop/batch/`; `data/processed_data/PHEME/batch/` respectively. 
+
+Run scripts in `models/train_and_evaluation/` to train the model and get the evaluation results. 
+
 You can also load the pre-trained models in `models/pre-trained/` following the evaluation scripts decribed under `models/train_and_evaluation/`.
 
 ## 4. Results
