@@ -47,6 +47,11 @@ This is the intended directory sturcture after the completion of data collection
 ├── README.md                           # Reproduction instructions
 └── requirements.txt                    # Dependencies
 ```
+Run the following commands to creat the directory sturcture needed.
+```
+chmod +x utils/build_dir_struct.sh
+./utils/build_dir_struct.sh
+```
 
 ## 0. Requirements
 This repository is coded in `python==3.8.5`.
@@ -82,10 +87,6 @@ cd ..
 The zipped file is only 25M and can be downloaded in around 3 minutes.
 
 ## 2. Data Pre-processing
-Run the following to creat the directory sturcture needed.
-```
-mkdir data/processed_data data/rwr_results
-```
 Data pre-processing includes image fetching, image encoding, text encoding, graph construction, and the extraction of other features.
 The details are described in [`data/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/data).
 
