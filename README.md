@@ -39,7 +39,8 @@ This is the intended directory sturcture after the completion of data collection
 ├── models/                             # Experiments-related scripts
 |   ├── train_and_evaluation/           # The model training and evaluation code
 |   ├── para_sensitivity/               # Parameter sensitivity code
-|   ├── data_splits/                     # Train-val-test split used
+|   ├── data_splits/                    # Train-val-test split used
+|   ├── best_models/                    # The reserved model for users to run the training script to save their models
 |   └── pre-trained/                    # The pre-trained models
 ├── utils/                              # Helper functions
 ├── README.md                           # Reproduction instructions
