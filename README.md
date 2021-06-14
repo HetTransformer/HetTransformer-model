@@ -74,5 +74,7 @@ Run scripts in `models/train_and_evaluation/` to train the model and get the eva
 
 You can also load the pre-trained models in `models/pre-trained/` following the evaluation scripts decribed under `models/train_and_evaluation/`.
 
+The data splits we used is presented in ` models/data_splits/`. The best models generated will be saved under `models/best_models/`
+
 ## 4. Results
 ![avatar](/figures_and_tables/table.png)
