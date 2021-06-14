@@ -1,5 +1,6 @@
 # HetTransformer-model
 This repository introduces the use of HetTransformer model.
+![avatar](/figures_and_tables/figure.png)
 
 ## Directory Structure
 This is the intended directory sturcture after the completion of data collection and processing steps.
@@ -90,3 +91,4 @@ The details are described in [`data/README.md`](https://github.com/HetTransforme
 
 ## 3. Model Training and evaluation
 ## 4. Results
+![avatar](/figures_and_tables/table.png)
