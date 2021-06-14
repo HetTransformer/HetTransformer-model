@@ -12,15 +12,15 @@ from sklearn import preprocessing
 
 def create_post_nodes(folder_name):
     
-    data_path = '/pheme-figshare/' # fake news net page
-    combo_path = '/pheme-figshare/pheme_input/%s/' % folder_name # store 5n5p100u input data 
-    post_text_path = '/pheme-figshare/text_embeddings/tweet_text/' # get user roberta embedding here
+    data_path = 'data/processed_data/PHEME/' # fake news net page
+    combo_path = 'data/processed_data/PHEME/%s/' % folder_name # store 5n5p100u input data 
+    post_text_path = 'data/processed_data/PHEME/text_embeddings/tweet_text/' # get user roberta embedding here
 
-    post_path = 'pheme_input/%s/normalized_post_nodes/' % folder_name # store post nodes here 
-    user_path = 'pheme_input/%s/normalized_user_nodes/' % folder_name # store user nodes here
-    news_path = 'pheme_input/%s/normalized_news_nodes/' % folder_name# store news nodes here
+    post_path = '%s/normalized_post_nodes/' % folder_name # store post nodes here 
+    user_path = '%s/normalized_user_nodes/' % folder_name # store user nodes here
+    news_path = '%s/normalized_news_nodes/' % folder_name# store news nodes here
 
-    neighbors_path = '/rwr_results/%s/' % folder_name # read neighbor list from here
+    neighbors_path = 'data/rwr_results/%s/' % folder_name # read neighbor list from here
 
 
     if not os.path.exists(data_path + post_path):
@@ -62,8 +62,7 @@ def create_post_nodes(folder_name):
     # post content
 
     post_content = dict()
-    count = 0
-    unincluded_post = []
+
     for post in tqdm(post_id, desc='get all post content'):
         try:
             f = open(post_text_path + post + '.txt', 'r')
@@ -71,15 +70,7 @@ def create_post_nodes(folder_name):
             f.close()
             post_content[post] = description
         except:
-            unincluded_post.append('p' + post)
-            print("%s not found." %post)
-            count += 1
             pass
-    print("%d posts not found" %count)
-    # with open(combo_path + 'post_description.txt', 'w') as f:
-        # np.savetxt(f, post_content)
-    with open(combo_path + 'unincluded_posts.txt', 'w') as f:
-        f.write(' '.join(unincluded_post))
 
 
 
@@ -98,17 +89,6 @@ def create_post_nodes(folder_name):
 
     # In[ ]:
 
-
-
-
-
-    print("%d posts." %len(post_id))
-    print("%d post content" %len(normalized_content))
-    print("%d news neighbors and %d post neighbors and %d user neighbors" %(len(all_post_neighbors), 
-                                                                            len(all_user_neighbors),
-                                                                           len(all_news_neighbors)))
-
-    problem_posts = list()
     for batch in tqdm(range(len(post_id)//5000 + 1), desc='writing batches......'):
         with open(data_path + post_path + 'batch_%d.txt' %batch, 'w') as f:
             for i in tqdm(range(batch*5000, (batch+1)*5000), desc='writing post nodes.....'):
@@ -119,7 +99,6 @@ def create_post_nodes(folder_name):
                     f.write(' '.join(post_content[post_id[i]]) + '\n')
                 except:
                     f.write(' '.join(padding_content) + '\n')
-                    problem_posts.append(post_id[i])
                 f.write(' '.join(all_news_neighbors[i]) + '\n')
                 f.write(' '.join(all_post_neighbors[i]) + '\n')
                 f.write(' '.join(all_user_neighbors[i]) + '\n')

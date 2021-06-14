@@ -14,19 +14,19 @@ from multiprocessing import Pool, Manager
 
 def create_FNN_post_nodes(dataset, folder_name):
     
-    data_path = '/FakeNewsNet/' # fake news net page
-    combo_path = '/FakeNewsNet/FNN_input/%s/%s/' % (dataset, folder_name) # store 5n5p100u input data 
-    image_path = '/FakeNewsNet/visual_features/'
-    post_path = 'FNN_input/%s/%s/normalized_post_nodes/' % (dataset, folder_name) # store post nodes here 
-    user_path = 'FNN_input/%s/%s/normalized_user_nodes/' % (dataset, folder_name) # store user nodes here
-    news_path = 'FNN_input/%s/%s/normalized_news_nodes/' % (dataset, folder_name) # store news nodes here
-    roberta_path = '/FakeNewsNet/text_embeddings/tweet_text/' # get user roberta embedding here
+    data_path = 'data/processed_data/FakeNewsNet/%s/' % dataset # fake news net page
+    combo_path = 'data/processed_data/FakeNewsNet/%s/%s/' % (dataset, folder_name) # store 5n5p100u input data 
+    image_path = 'data/processed_data/FakeNewsNet/%s/visual_features/' % dataset
+    post_path = 'data/processed_data/FakeNewsNet/%s/%s/normalized_post_nodes/' % (dataset, folder_name) # store post nodes here 
+    user_path = 'data/processed_data/FakeNewsNet/%s/%s/normalized_user_nodes/' % (dataset, folder_name) # store user nodes here
+    news_path = 'data/processed_data/FakeNewsNet/%s/%s/normalized_news_nodes/' % (dataset, folder_name) # store news nodes here
+    roberta_path = 'data/processed_data/FakeNewsNet/text_embeddings/tweet_text/' # get user roberta embedding here
 
-    neighbors_path = '/rwr_results/%s/' %folder_name # read neighbor list from here
+    neighbors_path = 'data/rwr_results/%s/' %folder_name # read neighbor list from here
 
 
-    if not os.path.exists(data_path + post_path):
-        os.makedirs(data_path + post_path)
+    if not os.path.exists(post_path):
+        os.makedirs(post_path)
 
     # In[25]:
 
@@ -71,7 +71,7 @@ def create_FNN_post_nodes(dataset, folder_name):
 
     # post features
     print('get all post features...')
-    f = open(data_path + 'FNN_post_features.txt', 'r')
+    f = open(data_path + 'post_features.txt', 'r')
     post_f = f.readlines()
     f.close()
     post_feature = dict()
@@ -97,8 +97,7 @@ def create_FNN_post_nodes(dataset, folder_name):
             post_content = np.loadtxt(f).astype(float)
     else:
         post_content = dict()
-        count = 0
-        unincluded_post = []
+
         for post in tqdm(post_id, desc='get all post content'):
             try:
                 f = open(roberta_path + post + '.txt', 'r')
@@ -106,15 +105,7 @@ def create_FNN_post_nodes(dataset, folder_name):
                 f.close()
                 post_content[post] = description
             except:
-                unincluded_post.append('p' + post)
-                # print("%s not found." %post)
-                count += 1
                 pass
-        print("%d/%d post content not found" %(count, len(post_id)))
-        # with open(combo_path + 'post_description.txt', 'w') as f:
-            # np.savetxt(f, post_content)
-        with open(combo_path + 'unincluded_posts.txt', 'w') as f:
-            f.write(' '.join(unincluded_post))
 
 
 
@@ -131,20 +122,8 @@ def create_FNN_post_nodes(dataset, folder_name):
     # padding description
     padding_description = ['0'] * len(normalized_content[0])
 
-    # In[ ]:
-
-
-
-    print("%d posts." %len(post_id))
-    print("%d post_features" %len(post_feature))
-    print("%d post content" %len(normalized_content))
-    print("%d news neighbors and %d post neighbors and %d user neighbors" %(len(all_post_neighbors), 
-                                                                            len(all_user_neighbors),
-                                                                           len(all_news_neighbors)))
-
-    problem_posts = list()
     for batch in tqdm(range(len(post_id)//5000 + 1), desc='writing batches......'):
-        with open(data_path + post_path + 'batch_%d.txt' %batch, 'w') as f:
+        with open(post_path + 'batch_%d.txt' %batch, 'w') as f:
             for i in tqdm(range(batch*5000, (batch+1)*5000), desc='writing post nodes.....'):
                 if (i >= len(post_id)):
                     break
@@ -153,18 +132,13 @@ def create_FNN_post_nodes(dataset, folder_name):
                     f.write(post_feature[post_id[i]])
                 except:
                     f.write(' '.join(padding_features) + '\n')
-                    problem_posts.append(post_id[i])
                 try:
                     f.write(' '.join(post_content[post_id[i]]) + '\n')
                 except:
                     f.write(' '.join(padding_description) + '\n')
-                    problem_posts.append(post_id[i])
                 f.write(' '.join(all_news_neighbors[i]) + '\n')
                 f.write(' '.join(all_post_neighbors[i]) + '\n')
                 f.write(' '.join(all_user_neighbors[i]) + '\n')
 
-
-    with open(combo_path + 'problem_posts.txt', 'w') as f:
-        f.write(' '.join(problem_posts))
 
 

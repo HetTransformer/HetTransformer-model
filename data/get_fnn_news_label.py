@@ -1,39 +1,37 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 import os
 from tqdm import tqdm
 
 
-# In[2]:
 
 
-fnn_pathway = ''
-output_dir = ''
-
-
-# In[ ]:
-
-
-news_label = list()
-for dataset in ['politifact/', 'gossipcop/']:
+def get_news_label(dataset):
+    
+    news_label = list()
     print('reading %s...' %dataset)
-    pathway = fnn_pathway + dataset
-    for post_type in ['fake/', 'real/']:
-        print('reading post info from %s file...' %post_type)
-        if post_type == 'fake/':
+    pathway = 'data/FakeNewsNet/%s' % dataset
+    output_dir = 'data/processed_data/FakeNewsNet/%s/' % dataset
+    
+    for news_type in ['Fake_News/', 'Real_News/']:
+        print('reading news info from %s file...' %news_type)
+        if news_type == 'Fake_News/':
             label = '0'
         else:
             label = '1'
-        news_list = os.listdir(pathway + post_type)
-        print("%d news from %s" %(len(news_list), dataset))
+        news_list = os.listdir(pathway + news_type)
         for n in news_list:
             news_label.append([n, label])
 
-with open(output_dir + 'news_label.txt', 'w') as f:
-    for news in news_label:
-        f.write(' '.join(news) + '\n')
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
 
+    with open(output_dir + 'news_label.txt', 'w') as f:
+        for news in news_label:
+            f.write(' '.join(news) + '\n')
+
+if __name__ == '__main__':
+    
+    get_news_label('PolitiFact')
+    get_news_label('GossipCop')

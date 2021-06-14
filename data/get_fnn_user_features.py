@@ -10,18 +10,20 @@ import pandas as pd
 from tqdm import tqdm
 
 
-fnn_pathway = ''
-output_dir = ''
+fnn_pathway = 
+
 
 
 
 uid = list()
 user_features = list()
 
-for dataset in ['politifact/', 'gossipcop/']:
-    print('reading %s...' %dataset)
-    pathway = fnn_pathway + dataset
-    for post_type in ['fake/', 'real/']:
+def get_user_features(dataset):
+    
+    print('reading %s...' % dataset)
+    pathway = 'data/FakeNewsNet/%s/' % dataset
+    output_dir = 'data/processed_data/FakeNewsNet/%s/' % dataset
+    for post_type in ['Fake_News/', 'Real_News/']:
         
         print('reading user info from %s file...' %post_type)
         news_list = os.listdir(pathway + post_type)
@@ -88,13 +90,20 @@ for dataset in ['politifact/', 'gossipcop/']:
                                          verified, geo_position, num_favorite, profile_background,
                                          profile, profile_image])
 
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+
+    with open(output_dir + 'user_features.txt', 'w') as f:
+        for i in tqdm(range(len(uid)), 'writing user features'):
+            f.write('u%s: ' %uid[i])
+            f.write(' '.join(user_features[i]))
+            f.write('\n')
+
     
-with open(output_dir + 'FNN_user_features.txt', 'w') as f:
-    for i in tqdm(range(len(uid)), 'writing user features'):
-        f.write('u%s: ' %uid[i])
-        f.write(' '.join(user_features[i]))
-        f.write('\n')
+if __name__ == '__main__':
     
-    
-    
+    get_post_features('PolitiFact')
+    get_post_features('GossipCop')
+
+   
 

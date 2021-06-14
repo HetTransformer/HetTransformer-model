@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 
 import os
 from tqdm import tqdm
 import json
 
-data_path = ''
+data_path = 'data/PHEME/'
+output_dir = 'data/processed_data/PHEME/'
 
 event_list = ['charliehebdo-all-rnr-threads/', 'ebola-essien-all-rnr-threads/', 'ferguson-all-rnr-threads/',
           'germanwings-crash-all-rnr-threads/', 'prince-toronto-all-rnr-threads/', 'gurlitt-all-rnr-threads/',
@@ -51,7 +49,10 @@ for event in tqdm(event_list):
                     user_features.append([user_id, verified, statuses_count, followers_count, 
                                           favorites_count, friends_count, geo_enabled])
 
-with open(data_path + 'user_features_pheme.txt', 'w') as f:
+if not os.exists.path(output_dir):
+    os.mkdir(output_dir)
+    
+with open(output_dir + 'user_features_pheme.txt', 'w') as f:
     for [user_id, verified, statuses_count, followers_count, 
           favorites_count, friends_count, geo_enabled] in user_features:
         f.write('%s: %s %s %s %s %s %s\n' %(user_id, verified, statuses_count, followers_count, 

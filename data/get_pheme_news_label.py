@@ -8,7 +8,8 @@
 import os
 from tqdm import tqdm
 
-data_path = ''
+data_path = 'data/PHEME/'
+output_dir = 'data/processed_data/PHEME/'
 
 event_list = ['charliehebdo-all-rnr-threads/', 'ebola-essien-all-rnr-threads/', 'ferguson-all-rnr-threads/',
           'germanwings-crash-all-rnr-threads/', 'prince-toronto-all-rnr-threads/', 'gurlitt-all-rnr-threads/',
@@ -38,6 +39,9 @@ for event in tqdm(event_list):
             news = news_list[0].rstrip('.json')
             news_labels.append([news, label])
 
-with open(data_path + 'news_label.txt', 'w') as f:
+if not os.path.exists(output_dir):
+    os.mkdir(output_dir)
+    
+with open(output_dir + 'news_label.txt', 'w') as f:
     for news in news_labels:
         f.write(': '.join(news) + '\n')
