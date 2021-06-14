@@ -696,7 +696,7 @@ for train, val in kfold.split(train_val):
 
 outemb_dims = [200, 80, 112, 160]
 hidden_dims = [64, 128, 256]
-PATH = '/model/data_splits/PHEME/'
+PATH = '/model/best_models/PHEME/'
 
 
 lr = 0.001
