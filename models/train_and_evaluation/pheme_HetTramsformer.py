@@ -725,7 +725,7 @@ optimizer = optim.SGD(net.parameters(), lr=lr)
 
 PATH = 'models/pre-trained/PHEME/'
 for count in range(num_folds):
-    cur_PATH = PATH + 'best_model' + '_' + str(count) + '.tar'
+    cur_PATH = PATH + 'best_model' + '_' + str(count) + '_82.5.tar'
     net, optimizer, epoch, best_val = load_checkpoint(net, optimizer, cur_PATH)
     print(best_val)
     net.eval()
