@@ -42,7 +42,7 @@ def neighbor_loader(pathway):
         neighbor_dict_post[neighbor_list[0][1:-1]] = [item[1:] for item in neighbor_list[1:] if item[0] == 'p']
     return neighbor_dict_n_p_u, neighbor_dict_n, neighbor_dict_news, neighbor_dict_post, neighbor_dict_user
 
-neighbor_dict = neighbor_loader('models/data_splits/PHEME/n_neighbors.txt')
+neighbor_dict = neighbor_loader('models/data_splits/PHEME/pheme_n_neighbors.txt')
 
 # Load the node data
 def data_loader(pathway='\', node_type="news"):
