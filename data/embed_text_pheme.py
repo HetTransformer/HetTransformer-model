@@ -9,8 +9,8 @@ from os import listdir
 from os.path import join
 
 # input
-in_dir = 'PHEME'
-involved_dir = f'rwr_results/pheme_n5_p5_u100'
+in_dir = 'data/PHEME'
+involved_dir = f'data/rwr_results/pheme_n5_p5_u100'
 
 # output
 out_dir = in_dir + '/text_embeddings'

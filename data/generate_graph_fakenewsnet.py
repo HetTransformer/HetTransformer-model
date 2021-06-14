@@ -6,8 +6,8 @@ import os
 from tqdm import tqdm
 from multiprocessing import Manager, Pool
 
-in_dir = 'FakeNewsNet/code/fakenewsnet_dataset'
-out_dir = 'FakeNewsNet/graph_def'
+in_dir = 'data/FakeNewsNet/code/fakenewsnet_dataset'
+out_dir = 'data/FakeNewsNet/graph_def'
 datasets = ['gossipcop', 'politifact']
 subsets = ['fake', 'real']
 num_process = 4

@@ -37,7 +37,7 @@ if __name__ == "__main__":
     for dataset in ['pheme', 'politifact', 'gossipcop']:
         if dataset in ['politifact', 'gossipcop']:
             prefix = f'fnn_{dataset}_'
-            in_dir = f'FakeNewsNet/graph_def/{dataset}'
+            in_dir = f'data/FakeNewsNet/graph_def/{dataset}'
             edge_dir = os.path.join(in_dir, dataset)
             node_types = ['n', 'p', 'u']
             edge_files = {
@@ -49,7 +49,7 @@ if __name__ == "__main__":
             edges_to_enforce = {('p', 'u'),}
         elif dataset == 'pheme':
             prefix = 'pheme_'
-            in_dir = 'PHEME'
+            in_dir = 'data/PHEME'
             edge_dir = in_dir
             node_types = ['n', 'p', 'u']
             edge_files = {
@@ -63,7 +63,7 @@ if __name__ == "__main__":
             edges_to_enforce = {('n', 'u'), ('p', 'u'),}
         elif dataset == 'buzzfeed':
             prefix = 'buzzfeed_'
-            in_dir = 'buzzfeed-kaggle'
+            in_dir = 'data/buzzfeed-kaggle'
             edge_dir = in_dir
             node_types = ['n', 's', 'u']
             edge_files = {

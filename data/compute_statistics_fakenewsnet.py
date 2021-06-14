@@ -2,13 +2,13 @@ import os
 import json
 from tqdm import tqdm
 
-prefix = 'FakeNewsNet/code/'
+prefix = 'data/FakeNewsNet/code/'
 ds_path = prefix + 'fakenewsnet_dataset'
 dataset = ['politifact', 'gossipcop']
 subset = ['fake', 'real']
 
-downloaded_image_dir = 'FakeNewsNet/top_images'
-err_res_path = 'FakeNewsNet/img_err_res_news_id.log'
+downloaded_image_dir = 'data/FakeNewsNet/top_images'
+err_res_path = 'data/FakeNewsNet/img_err_res_news_id.log'
 
 keys = [
     '# News articles', '# News articles with text',

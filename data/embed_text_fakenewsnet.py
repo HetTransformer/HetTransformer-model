@@ -7,14 +7,14 @@ from multiprocessing import Manager, Process, Pool
 from weibo import save_embed_file
 
 # input
-in_dir = 'FakeNewsNet/code/fakenewsnet_dataset'
+in_dir = 'data/FakeNewsNet/code/fakenewsnet_dataset'
 dataset = 'politifact'
 # dataset = 'gossipcop'
 ds_dirs = [os.path.join(in_dir, dataset, ss) for ss in ['real', 'fake']]  #########################
-involved_dir = f'rwr_results/fnn_{dataset}_512'
+involved_dir = f'data/rwr_results/fnn_{dataset}_512'
 
 # output
-out_dir = 'FakeNewsNet/text_embeddings'
+out_dir = 'data/FakeNewsNet/text_embeddings'
 if not os.path.isdir(out_dir):
     os.mkdir(out_dir)
 

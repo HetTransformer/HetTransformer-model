@@ -6,8 +6,8 @@ import json
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-in_dir = 'FakeNewsNet/code'
-out_f = 'FakeNewsNet/retweet_logged_ids.json'
+in_dir = 'data/FakeNewsNet/code'
+out_f = 'data/FakeNewsNet/retweet_logged_ids.json'
 
 again_key = 'again (re)tweet ids'
 not_again_key = 'not again (re)tweet ids'

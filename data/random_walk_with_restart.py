@@ -200,7 +200,7 @@ if __name__ == "__main__":
     for dataset in ['politifact', 'gossipcop', 'pheme',]:
         if dataset in ['politifact', 'gossipcop']:
             prefix = f'fnn_{dataset}_'
-            in_dir = 'FakeNewsNet/graph_def'
+            in_dir = 'data/FakeNewsNet/graph_def'
             edge_dir = os.path.join(in_dir, dataset)
             node_types = ['n', 'p', 'u']
             edge_files = {
@@ -250,7 +250,7 @@ if __name__ == "__main__":
         else:
             configuration_tag = prefix + f'{max_neigh}'
 
-        output_dir = f"rwr_results/{configuration_tag}"
+        output_dir = f"data/rwr_results/{configuration_tag}"
 
         adj_list = dict()  # IN  adj_list['p123'] = ['u456', 'n789', ...]
 

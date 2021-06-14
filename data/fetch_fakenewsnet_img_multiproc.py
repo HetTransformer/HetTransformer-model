@@ -8,15 +8,17 @@ import requests
 
 n_pro = 8
 batch_sz = 128
-in_dir = 'FakeNewsNet/code/fakenewsnet_dataset'
-out_dir = 'FakeNewsNet/top_images'
-err_res_path = 'FakeNewsNet/img_err_res_news_id.log'
+in_dir = 'data/FakeNewsNet/code/fakenewsnet_dataset'
+out_dir = 'data/FakeNewsNet/top_images'
+err_res_path = 'data/FakeNewsNet/img_err_res_news_id.log'
 sources = ['gossipcop', 'politifact']
 labels = ['fake', 'real']
 
-img_file_exts = ["JPG", "PNG", "GIF", "WEBP", "TIFF", "PSD",
-                 "RAW", "BMP", "HEIF", "JPEG", "SVG", "AI", "EPS", "PDF"]
+img_file_exts = [f".{ext}" for ext in ["JPG", "PNG", "GIF", "WEBP", "TIFF", "PSD",
+                 "RAW", "BMP", "HEIF", "JPEG", "SVG", "AI", "EPS", "PDF"]]
 
+if not os.path.isdir(out_dir):
+    os.mkdir(out_dir)
 
 def worker(pathes: List[str], process_idx: int, err_res_ids: Set[str], return_dict):
     new_err_res_ids = set()
@@ -42,14 +44,14 @@ def worker(pathes: List[str], process_idx: int, err_res_ids: Set[str], return_di
             new_err_res_ids.add(news_id)
             continue
 
-        file_ext = 'UNK_EXT'
+        file_ext = '.UNK_EXT'
         for ext in img_file_exts:
             ext_idx_upper = url.rfind(ext)
             ext_idx_lower = url.rfind(ext.lower())
             if ext_idx_upper != -1 or ext_idx_lower != -1:
                 file_ext = ext
                 break
-        out_path = os.path.join(out_dir, f'{news_id}.{file_ext}')
+        out_path = os.path.join(out_dir, f'{news_id}{file_ext}')
 
         if os.path.isfile(out_path):  # and os.path.getsize(out_path) > 0:
             # print(f'DEBUG processed {news_id}')
