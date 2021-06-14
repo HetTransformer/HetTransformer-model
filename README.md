@@ -21,13 +21,12 @@ This is the intended directory sturcture after the completion of data collection
 |   ├── data_splits/                    # Train-val-test split used
 |   ├── best_models/                    # The reserved model for users to run the training script to save their models
 |   └── pre-trained/                    # The pre-trained models
-├── utils/                              # Helper functions
 ├── README.md                           # Reproduction instructions
 └── requirements.txt                    # Dependencies
 ```
 Run the following commands to creat the directory sturcture needed.
 ```
-mkdir data/processed_data data/processed_data/FakeNewsNet data/processed_data/PHEME data/rwr_results
+mkdir data/processed_data data/rwr_results
 ```
 
 ## 0. Requirements
