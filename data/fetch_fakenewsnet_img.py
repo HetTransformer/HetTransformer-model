@@ -3,29 +3,67 @@ import os
 import urllib.request
 import http.cookiejar
 
-data_dirs = ["/data/FakeNewsNet/PolitiFact/Real_News/", "/data/FakeNewsNet/PolitiFact/Fake_News/", "/data/FakeNewsNet/GossipCop/Real_News/", "/data/FakeNewsNet/GossipCop/Fake_News/"]
-
-for data_dir in data_dirs:
-    all_json = os.listdir(data_dir)
-    os.mkdir(data_dir+'img/')
-    k = 0
-    cj = http.cookiejar.CookieJar()
-    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
-    opener.addheaders = [('User-Agent' , 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 ')]
-    urllib.request.install_opener(opener)
-    errors = []
-    picture_error = []
-    for j_name in all_json:
-        j = open(data_dir+j_name,'rb')
-        info = json.load(j)
+politifact_data_dirs = ["/data/FakeNewsNet/code/fakenewsnet_dataset/politifact/real/", "/data/FakeNewsNet/code/fakenewsnet_dataset/politifact/fake/"]
+gossipcop_data_dirs = ["/data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/real/", "/data/FakeNewsNet/code/fakenewsnet_dataset/gossipcop/fake/"]
+politifact_img_dir = "/data/processed_data/FakeNewsNet/PolitiFact/img/"
+gossipcop_img_dir = "/data/processed_data/FakeNewsNet/GossipCop/img/"
+for data_dir in politifact_data_dirs: 
+    all_folder = os.listdir(data_dir)
+    for folder_name in all_folder:
+        folder_dir = data_dir+folder_name
+        all_files = os.listdir((folder_dir))
+        flag = False
+        for file in all_files:
+            if file[-4:]=='json':
+                j_name = file
+                j = open(folder_dir+'/'+file,'rb')
+                info = json.load(j)
+                flag = True  
+        if flag == False:
+            continue
+        cj = http.cookiejar.CookieJar()
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+        opener.addheaders = [('User-Agent' , 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 ')]
+        urllib.request.install_opener(opener)
+        errors = []
+        picture_error = []
         try:
             print(info['top_img'])
             try:
-                urllib.request.urlretrieve(info['top_img'], data_dir+"img/"+j_name[:-5]+".jpg")
+                urllib.request.urlretrieve(info['top_img'], politifact_img_dir+j_name[:-5]+".jpg")
             except:
                 print(j_name)
                 picture_error.append(j_name)
         except:
             errors.append(j_name)
-    print(len(picture_error))
-    print(len(errors))
+            
+for data_dir in gossipcop_data_dirs: 
+    all_folder = os.listdir(data_dir)
+    for folder_name in all_folder:
+        folder_dir = data_dir+folder_name
+        all_files = os.listdir((folder_dir))
+        flag = False
+        for file in all_files:
+            if file[-4:]=='json':
+                j_name = file
+                j = open(folder_dir+'/'+file,'rb')
+                info = json.load(j)
+                flag = True  
+        if flag == False:
+            continue
+        cj = http.cookiejar.CookieJar()
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+        opener.addheaders = [('User-Agent' , 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 ')]
+        urllib.request.install_opener(opener)
+        errors = []
+        picture_error = []
+        try:
+            print(info['top_img'])
+            try:
+                urllib.request.urlretrieve(info['top_img'], gossipcop_img_dir+j_name[:-5]+".jpg")
+            except:
+                print(j_name)
+                picture_error.append(j_name)
+        except:
+            errors.append(j_name)
+
