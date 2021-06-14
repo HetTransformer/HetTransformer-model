@@ -136,9 +136,9 @@ def data_loader(pathway='\', node_type="news"):
         # padding_node = Het_Node(node_type='user', node_id=padding_id, embed=padding_embed)
         return user_node #, padding_node
     
-post_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/PHEME/batch/normalized_post_nodes/', node_type="post")
-news_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/PHEME/batch/normalized_news_nodes/', node_type="news")
-user_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/PHEME/batch/normalized_user_nodes/', node_type="user")
+post_nodes = data_loader(pathway='data/processed_data/PHEME/batch/normalized_post_nodes/', node_type="post")
+news_nodes = data_loader(pathway='data/processed_data/PHEME/batch/normalized_news_nodes/', node_type="news")
+user_nodes = data_loader(pathway='data/processed_data/PHEME/batch/normalized_user_nodes/', node_type="user")
 news_emb_dict = {}
 post_emb_dict = {}
 user_emb_dict = {}
