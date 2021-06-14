@@ -13,7 +13,8 @@ This is the intended directory sturcture after the completion of data collection
 |   |   ├── FakeNewsNet/                # Pre-processed FakeNewsNet data
 |   |   └── PHEME/                      # Pre-processed PHEME data
 |   ├── rwr_results/                    # Generated RWR neighbors
-|   └── ...                             # Data processing scripts
+|   ├── README.md                       # Data pre-processing instructions
+|   └── ...                             # Data pre-processing scripts
 ├── figures_and_tables/                 # Figures and tables in this README.md 
 ├── models/                             # Experiments-related scripts
 |   ├── train_and_evaluation/           # The model training and evaluation code
