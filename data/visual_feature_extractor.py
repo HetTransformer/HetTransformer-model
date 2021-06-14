@@ -52,7 +52,7 @@ class img_Dataset(Dataset):
         return len(self.image_files)
 
 
-file_paths = ["/data/FakeNewsNet/PolitiFact/Fake_News/img/", "/data/FakeNewsNet/PolitiFact/Real_News/img/", "/data/FakeNewsNet/GossipCop/Fake_News/img/", "/data/FakeNewsNet/GossipCop/Real_News/img/"]
+file_paths = ["data/processed_data/FakeNewsNet/PolitiFact/img/", "data/processed_data/FakeNewsNet/GossipCop/img/"]
 for file_path in file_paths:
     all_img = os.listdir(file_path)
     print(all_img)
