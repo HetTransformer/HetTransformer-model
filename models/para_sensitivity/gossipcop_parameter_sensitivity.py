@@ -1,7 +1,6 @@
 import numpy as np
 import torch
 import torch.nn as nn
-#import torch.nn.init as init
 from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
 from torch.optim.lr_scheduler import StepLR
@@ -9,9 +8,6 @@ import torch.optim as optim
 from os import path
 from torch.autograd import Variable
 
-
-
-# news-news; news-post; post-user; user-user
 
 
 class Het_Node():
@@ -93,9 +89,7 @@ def data_loader(pathway='\', node_type="post"):
             node = Het_Node(node_type="news", node_id=news_id[i], embed=news_embed[i],
                             label=news_label[i])
             news_node.append(node)
-        # padding_node = Het_Node(node_type="news", node_id=padding_id, embed=padding_embed,
-                            # neighbor_list_news=padding_news_n_neigh, neighbor_list_post=padding_news_p_neigh, neighbor_list_user=padding_news_u_neigh)
-        return news_node# , padding_node
+        return news_node
 
     elif node_type == 'post':
         post_node = []
@@ -127,8 +121,8 @@ def data_loader(pathway='\', node_type="post"):
         for i in range(len(post_id)):
             node = Het_Node(node_type="post", node_id=post_id[i], embed=post_embed[i])
             post_node.append(node)
-        # padding_node = Het_Node(node_type='post', node_id=padding_id, embed=padding_embed)
-        return post_node# , padding_node
+        
+        return post_node
 
     else:
         user_node = []
@@ -160,8 +154,8 @@ def data_loader(pathway='\', node_type="post"):
         for i in range(len(user_id)):
             node = Het_Node(node_type="user", node_id=user_id[i], embed=user_embed[i])
             user_node.append(node)
-        # padding_node = Het_Node(node_type='user', node_id=padding_id, embed=padding_embed)
-        return user_node#, padding_node
+        
+        return user_node
 news_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_news_nodes/', node_type="news")
 post_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_post_nodes/', node_type="post")
 user_nodes = data_loader(pathway='data/processed_data/FakeNewsNet/GossipCop/batch/normalized_user_nodes/', node_type="user")
@@ -176,10 +170,7 @@ for post in post_nodes:
     post_emb_dict[post.node_id] = post.emb
 for news in news_nodes:
     news_emb_dict[news.node_id] = news.emb
-    
-#user_emb_dict[u_padding.node_id] = u_padding.emb
-#post_emb_dict[p_padding.node_id] = p_padding.emb
-#news_emb_dict[n_padding.node_id] = n_padding.emb
+
 
 news_nodes_real = []
 news_nodes_fake = []
@@ -188,9 +179,7 @@ for node in news_nodes:
         news_nodes_real.append(node)
     else:
         news_nodes_fake.append(node)
-print("number of fake nodes: ", len(news_nodes_fake))
-print("number of real nodes: ", len(news_nodes_real))
-#fake : real = 0.9842 : 1
+
 
 import math
 from torch_position_embedding import PositionEmbedding
@@ -213,8 +202,6 @@ class PositionalEncoding(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
-        #print(x.shape)
-        #print(self.pe[:x.size(0), :].shape)
         x = x + self.pe[:x.size(0), :]
         return self.dropout(x)
 
@@ -304,8 +291,6 @@ class Het_GNN(nn.Module):
                                           dropout=0.1, activation='relu', custom_encoder=None, custom_decoder=None)
         self.encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=attn_heads)
         self.transformer_encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=enc_layers)
-        # self.node_type_iput = NeighborTypeEmbedding(num_node_type=3, embed_size=self.d_model)
-        # self.positional_embedding = PositionalEncoding(self.d_model, dropout=0.1, max_len=5000)
         # Define the initial linear hidden layer
         
         
@@ -314,11 +299,7 @@ class Het_GNN(nn.Module):
         self.init_linear_other_p = nn.Linear(self.input_dim[2], self.hidden_dim)
         self.init_linear_other_user = nn.Linear(self.input_dim[3], self.hidden_dim)
         
-        
-#         self.init_linear_text = nn.Linear(self.input_dim[0], self.ini_hidden_dim[0])
-#         self.init_linear_image = nn.Linear(self.input_dim[1], self.ini_hidden_dim[1])
-#         self.init_linear_other = nn.Linear(self.input_dim[2], self.ini_hidden_dim[2])
-#         self.init_linear_other_user = nn.Linear(self.input_dim[3], self.ini_hidden_dim[3])
+     
         # Define the attention layer
         self.post_content_attention_other = nn.MultiheadAttention(self.hidden_dim, self_attn_heads, dropout = 0.2)
         self.news_title_LSTM_text = eval('nn.' + rnn_type)(self.ini_hidden_dim[0], self.hidden_dim, self.num_layers,
@@ -356,24 +337,21 @@ class Het_GNN(nn.Module):
         self.layernorm5 = nn.LayerNorm([1,out_embed_d])
         # Define same_type_agg
         self.n_init_linear = nn.Linear(self.n_input_dim, self.n_hidden_dim)
-        # self.n_init_linear = nn.Linear(self.n_input_dim, self.n_ini_hidden_dim)
-        # self.u_init_dropout = nn.Dropout(p=0.2)
+        
         self.n_LSTM = eval('nn.' + self.n_rnn_type)(self.n_ini_hidden_dim, self.n_hidden_dim, self.n_num_layers,
                                                     batch_first=True, bidirectional=True, dropout=0.5)
         self.n_attention = nn.MultiheadAttention(self.n_hidden_dim, self_attn_heads, dropout = 0.2)
         self.n_linear = nn.Linear(self.n_hidden_dim, self.n_output_dim)
         self.n_dropout = nn.Dropout(p=0.5)
         self.u_init_linear = nn.Linear(self.u_input_dim, self.u_hidden_dim)
-        # self.u_init_linear = nn.Linear(self.u_input_dim, self.u_ini_hidden_dim)
-        # self.u_init_dropout = nn.Dropout(p=0.2)
+        
         self.u_LSTM = eval('nn.' + self.u_rnn_type)(self.u_ini_hidden_dim, self.u_hidden_dim, self.u_num_layers,
                                                     batch_first=True, bidirectional=True, dropout=0.5)
         self.u_attention = nn.MultiheadAttention(self.u_hidden_dim, self_attn_heads, dropout = 0.2)
         self.u_linear = nn.Linear(self.u_hidden_dim, self.u_output_dim)
         self.u_dropout = nn.Dropout(p=0.5)
         self.p_init_linear = nn.Linear(self.p_input_dim, self.p_hidden_dim)
-        # self.p_init_linear = nn.Linear(self.p_input_dim, self.p_ini_hidden_dim)
-        # self.p_init_dropout = nn.Dropout(p=0.2)
+        
         self.p_LSTM = eval('nn.' + self.p_rnn_type)(self.p_ini_hidden_dim, self.p_hidden_dim, self.p_num_layers,
                                                     batch_first=True, bidirectional=True, dropout=0.5)
         self.p_attention = nn.MultiheadAttention(self.p_hidden_dim, self_attn_heads, dropout = 0.2)
@@ -385,7 +363,7 @@ class Het_GNN(nn.Module):
         self.out_dropout = nn.Dropout(p=0.25)
         self.out_linear = nn.Linear(self.out_embed_d, self.outemb_d)
 
-        # self.out_final = nn.Linear(self.out_linear_d, self.outemb_d)
+       
         self.output_act = nn.Sigmoid()
 
     def init_weights(self):
@@ -725,7 +703,7 @@ class Het_GNN(nn.Module):
                 encoder_emb_input.append(torch.Tensor(n_aft_rnn_dict[type_id[1]]))
                 encoder_type_input.append(0)
             encoder_order_input.append(i+1)
-        #encoder_emb_input = torch.Tensor(encoder_emb_input)
+       
         encoder_type_input = torch.LongTensor(encoder_type_input)
         encoder_order_input = torch.LongTensor(encoder_order_input)
         decoder_emb_input.append(c_agg_batch[0])
@@ -797,7 +775,7 @@ class Het_GNN(nn.Module):
     def output(self, c_embed_batch):
         batch_size = 1
         # make c_embed 3D tensor. Batch_size * 1 * embed_d
-        #print(c_embed_batch.shape)
+       
         c_embed = c_embed_batch[0, 0, :]
         c_embed = c_embed.view(batch_size, 1, self.out_embed_d)
         c_embed = self.out_dropout(c_embed)
