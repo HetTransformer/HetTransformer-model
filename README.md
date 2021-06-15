@@ -70,11 +70,11 @@ The details are described in [`data/README.md`](https://github.com/HetTransforme
 ## 3. Model Training and evaluation
 After generating batch files following step 1 and 2 in `data/processed_data/FakeNewsNet/PolitiFact/batch/`; `data/processed_data/FakeNewsNet/GossipCop/batch/`; `data/processed_data/PHEME/batch/` respectively. 
 
-Run scripts in `models/train_and_evaluation/` to train the model and get the evaluation results. 
+Download and place the n_neighbors.txt files following the instructions in [`models/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/models).
 
 You can also load the pre-trained models in `models/pre-trained/` following the evaluation scripts decribed under `models/train_and_evaluation/`.
 
-The best models generated will be saved under `models/best_models/`
+Run scripts in `models/train_and_evaluation/` to train the model and get the evaluation results. You may need to rename the pre-trained models or change the PATH in train_and_evaluation codes if you do so. Since the default setting is to overwrite the models saved under `models/pre-trained/`.
 
 ## 4. Results
 ![avatar](/figures_and_tables/table.png)
