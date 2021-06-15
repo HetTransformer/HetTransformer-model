@@ -72,6 +72,8 @@ After generating batch files following step 1 and 2 in `data/processed_data/Fake
 
 Download and place the n_neighbors.txt files following the instructions in [`models/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/models).
 
+You can download the pre-trained models following the instructions in [`models/pre-trained/README.md`](https://github.com/HetTransformer/HetTransformer-model/tree/main/models/pre-trained).
+
 You can also load the pre-trained models in `models/pre-trained/` following the evaluation scripts decribed under `models/train_and_evaluation/`.
 
 Run scripts in `models/train_and_evaluation/` to train the model and get the evaluation results. You may need to rename the pre-trained models or change the PATH in train_and_evaluation codes if you do so. Since the default setting is to overwrite the models saved under `models/pre-trained/`.
