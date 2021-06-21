@@ -6,4 +6,4 @@ urllib3==1.25.11  # Fetch FakeNewsNet images
 torchvision==0.9.0  # Image encoding
 PIL==8.2.0  # Image encoding
 torch-position-embedding==0.8.0  # Positional embedding
-sklearn==0.23.1 # train/test splitting
+sklearn==0.23.1  # train/test splitting
