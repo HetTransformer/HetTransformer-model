@@ -14,7 +14,6 @@ from torch.optim.lr_scheduler import StepLR
 import torch.optim as optim
 from os import path
 from torch.autograd import Variable
-import matplotlib.pyplot as plt
 
 device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
 
